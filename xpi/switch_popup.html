@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      /* Use system font stack */
+      body {
+        margin: 0;
+        padding: 6px;
+        font-family: system-ui, sans-serif;
+        font-size: 13px;
+        color: var(--text-color);
+        background: var(--background-color);
+        min-width: 200px;
+      }
+
+      /* Container for all buttons */
+      #identity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      /* Shared button styles */
+      .identity-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 8px;
+        border: none;
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        width: 100%;
+        color: inherit;
+        font: inherit;
+      }
+
+      /* Hover styles */
+      .identity-button:hover {
+        background-color: var(--button-hover-bg);
+      }
+
+      /* Icon styles */
+      .identity-button .icon {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      /* Label styles */
+      .identity-button .identity {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Decontain separator */
+      .identity-button.decontain {
+        border-top: 1px solid var(--separator-color);
+        margin-top: 4px;
+        padding-top: 8px;
+      }
+
+      /* Light theme variables */
+      @media (prefers-color-scheme: light) {
+        :root {
+          --text-color: #202124;
+          --background-color: #ffffff;
+          --button-hover-bg: rgba(0, 0, 0, 0.05);
+          --separator-color: #d1d1d1;
+        }
+      }
+
+      /* Dark theme variables */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text-color: #f9f9fa;
+          --background-color: #2b2a33;
+          --button-hover-bg: rgba(255, 255, 255, 0.1);
+          --separator-color: #4a4a4f;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="identity-list"></div>
+    <script src="switch_container.js"></script>
+  </body>
+</html>
