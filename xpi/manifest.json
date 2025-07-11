@@ -5,13 +5,13 @@
   "short_name": "SwitchCon",
   "author":  "MarsCat",
   "description": "Allows to switch the current tab to a different container.",
-  "version": "0.8",
+  "version": "1.0",
 
   
   "developer":
   {
     "name": "MarsCat",
-    "url": "https://gitlab.com/mjanetmars/switch-container"
+    "url": "https://github.com/mjanetmars/switch-container"
   },
 
   "icons":
