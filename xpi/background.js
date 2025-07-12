@@ -1,3 +1,59 @@
+// #region Icon switcher
+
+// add add-on context menu for icon select
+browser.runtime.onInstalled.addListener(function()
+{
+  browser.contextMenus.create({
+    id: "toggle-icon-style",
+    title: "Toggle Icon Theming",
+    contexts: ["browser_action"]
+  });
+});
+
+// icon defs
+const ICONS =
+{
+  0: "switch_container.svg",
+  1: "switch_dullgray.svg"
+};
+
+// sets the icon
+function setIcon(style)
+{
+  const path = ICONS[style] || ICONS[0];
+  return browser.browserAction.setIcon({ path });
+}
+
+// set-up icon on init
+async function initIcon()
+{
+  const result = await browser.storage.local.get("iconStyle");
+  const iconStyle = result.iconStyle === undefined ? 0 : result.iconStyle;
+  await setIcon(iconStyle);
+}
+
+initIcon();
+
+// change the icon based on user interaction
+browser.contextMenus.onClicked.addListener(async function(info, tab)
+{
+  if (info.menuItemId !== "toggle-icon-style") return;
+
+  const result = await browser.storage.local.get("iconStyle");
+  const iconStyle = result.iconStyle === undefined ? 0 : result.iconStyle;
+  const newStyle = iconStyle === 0 ? 1 : 0;
+  
+  await browser.storage.local.set({ iconStyle: newStyle });
+  await setIcon(newStyle);
+});
+
+// change the icon even if it's changed elsewhere
+browser.storage.onChanged.addListener(function(changes)
+{
+  if (changes.iconStyle) { setIcon(changes.iconStyle.newValue); }
+});
+
+// #endregion
 
 // #region Enable/disable container button
 
@@ -9,9 +65,8 @@ function protocolIsApplicable( url )
 {
   try
   {
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    return APPLICABLE_PROTOCOLS.includes(anchor.protocol);
+    const urlObj = new URL(url);
+    return APPLICABLE_PROTOCOLS.includes(urlObj.protocol);
   }
   catch
   {
@@ -35,7 +90,6 @@ function initializePageAction(tab)
   else
     { browser.browserAction.disable(tab.id); }
 }
-
 
 // #endregion
 
