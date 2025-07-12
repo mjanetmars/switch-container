@@ -14,6 +14,8 @@ Having been completely rewritten from scratch for version 1.0, it's now an [Unli
 
 ## What's New
 
+- **Version 1.1**
+-- Added an icon theme toggle to the context menu, for people who hate rainbows
 - **Version 1.0**
 -- Complete rewrite, fixes historical bugs and finally adds dark mode compatibility!
 - **Version 0.8**
