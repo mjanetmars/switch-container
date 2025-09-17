@@ -10,6 +10,15 @@ browser.runtime.onInstalled.addListener(function()
   });
 });
 
+browser.runtime.onStartup.addListener(function()
+{
+  browser.contextMenus.create({
+    id: "toggle-icon-style",
+    title: "Toggle Icon Theming",
+    contexts: ["browser_action"]
+  });
+});
+
 // icon defs
 const ICONS =
 {
